@@ -1,2 +1,22 @@
 Info: request /todo/api/v1.0/nltk_process
 Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/polyglot_process
+Info: request /todo/api/v1.0/polyglot_process
+Error: this page does not exist (404)
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/polyglot_process
+Info: request /todo/api/v1.0/polyglot_process
+Info: request /todo/api/v1.0/polyglot_process
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/nltk_entities
+Info: request /todo/api/v1.0/polyglot_entities
+Info: request /todo/api/v1.0/calais_entities
+400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+Error: There is a problem in your request (400)
+400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+Error: There is a problem in your request (400)
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/nltk_process
+Info: request /todo/api/v1.0/nltk_process

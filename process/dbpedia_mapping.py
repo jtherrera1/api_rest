@@ -12,9 +12,7 @@ class MappingDBpedia:
 	        	req = urllib2.Request(DBPEDIA_LOOKUP.format(entity_encode))
 	        	req.add_header('Accept', 'application/json')
 	        	response = urllib2.urlopen(req)
-
 	       		sj =  json.load(response)
-
         		if  sj['results'] is not None:
                 		entities = [ {'uri': entity['uri'], 'label': entity['label'] }  for entity in sj['results']]
 		except Exception as e:
@@ -56,6 +54,11 @@ class MappingDBpedia:
 
 	def get_entity(self, entity):
 		try:
+			entity = entity.strip() if entity else ''
+
+			if (not entity):
+				return { 'Message': 'Warning: The Entity is empty'}
+
 			entities = self._find_dbpedia_entities(entity)
 			entity =  entity.lower()
 			distances = [ {'entity': source, 'distance': self._levenshtein_distance(entity,source['label'].lower())} for source in entities ]
@@ -63,9 +66,8 @@ class MappingDBpedia:
 			if len(mapping) > 0 :
 				list_map = [ value for value in mapping]
 				return  { entity: list_map }
-			return  { entity: None }
                 except Exception as e:
                          raise ValueError('MappingDBpedia: get_entity(self,entity),'+ str(e))
 
-                return {}
+                return {entity: 'Warning: Sorry, no results'}
 

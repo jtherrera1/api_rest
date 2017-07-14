@@ -30,7 +30,18 @@ class NltkExtract:
 
 	def get_entities(self,data):
 		try:
-			body = data['body']
+                        if data is None:
+                                return {'results': 'Sorry, the request is empty'}
+                        if 'body' not in data:
+                                return {'results': 'The data sent does not have the appropriate structure'}
+
+                        body = data['body']
+
+                        body = body.strip() if body else ''
+
+                        if (not body):
+                                return { 'results': 'Warning: The Entity is empty'}
+
 			sentences = nltk.sent_tokenize(body, language='portuguese')
 			tokenized_sentences = [nltk.word_tokenize(sentence.encode('utf-8')) for sentence in sentences]
 			tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
@@ -48,20 +59,20 @@ class NltkExtract:
 		except Exception as e:
 			raise ValueError('NltkExtract: get_entities(self,data),'+ str(e))
 
-		return {}		
 
 	def map_entities(self, data):
 		try:
 		        entities = self.get_entities(data)
 		        entities = entities['results']
+			if  type(entities) == str :
+				return { 'results': entities}
+
 			object_dbpedia = MappingDBpedia()
 		        if len(entities) > 0:
 		                entities = [ object_dbpedia.get_entity(entity.decode('utf-8')) for entity in entities]
 
-	        	return entities
+	        	return {'results': entities}
 
-                except Exception:
+                except Exception as e:
                        raise ValueError('NltkExtrat: map_entities (sself,data),'+ str(e))
-
-		return {}
 
